@@ -1,2 +1,31 @@
-<test>
-</test>    
+<test integration="false">
+
+    <test-case id="1">
+        <q>/start</q>
+        <a state="/Start"/>
+    </test-case>
+
+    <test-case id="2">
+    <mockData>
+        <query method="get">http://api.openweathermap.org/data/2.5/weather?APPID=***&amp;units=metric&amp;lang=ru&amp;q=москва</query>
+        <response type="json" status="200">{"coord":{"lon":37.62,"lat":55.75},"weather":[{"id":500,"main":"Rain","description":"небольшой дождь","icon":"10d"}],"base":"stations","main":{"temp":20.33,"feels_like":18.17,"temp_min":20,"temp_max":21,"pressure":1006,"humidity":68},"visibility":10000,"wind":{"speed":5,"deg":200},"rain":{"1h":0.43},"clouds":{"all":100},"dt":1600337349,"sys":{"type":1,"id":9029,"country":"RU","sunrise":1600311939,"sunset":1600357345},"timezone":10800,"id":524901,"name":"Москва","cod":200}</response>
+    </mockData>
+
+        <q>/start</q>
+        <a>Привет! Я электронный помощник. Я могу сообщить вам текущую погоду в любом городе. Напишите город.</a>
+        <q>Москва</q>
+        <a>Сегодня в городе Москва небольшой дождь, 20°C</a>
+        <a>Советую захватить с собой зонтик!</a>
+    </test-case>
+
+
+    <test-case id="3">
+        <q>/start</q>
+        <a state="/Start"/>
+        <q>Расскажи что-нибудь еще</q>
+        <a state="/CatchAll"/>
+        <q>Москва</q>
+        <a state="/GetWeather"/>
+    </test-case>
+
+</test>
