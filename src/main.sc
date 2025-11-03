@@ -15,25 +15,4 @@ state: GetWeather
                 var description = res.weather[0].description; // Например: "небольшой дождь"
                 var mainWeather = res.weather[0].main; // Например: "Rain"
                 var temp = Math.round(res.main.temp); // Температура
-                var cityName = res.name; // Название из API
-
-                var replyMsg = "Сегодня в городе " + capitalize(cityName) + " " + description + ", " + temp + "°C";
-
-                if (mainWeather == 'Rain' || mainWeather == 'Drizzle') {
-                    replyMsg += ". Советую захватить с собой зонтик!";
-                } else if (Math.round(res.main.temp) < 0) {
-                    replyMsg += ". Бррррр ну и мороз";
-                }
-
-                $reactions.answer(replyMsg);
-            } else {
-                $reactions.answer("Что-то сервер барахлит. Не могу узнать погоду.");
-            }
-        }).catch(function (err) {
-            $reactions.answer("Что-то сервер барахлит. Не могу узнать погоду.");
-        });
-
-state: CatchAll
-    event!: noMatch
-    a: Извините, я вас не понимаю, зато могу рассказать о погоде. Введите название города
-    go: /GetWeather
+                var cityName = res.name; // Название города
